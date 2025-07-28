@@ -19,7 +19,7 @@ Replace this text with a brief statement about the system that you intend to cre
 
 # Relevant Implications
 
-## NAME OF IMPLICATION 1
+## End-User Implications of Digital Technologies
 
 Replace this text with a clear explanation of what the implication means.
 
@@ -33,7 +33,7 @@ Replace this text with an explanation of what you will need to consider moving f
 
 
 
-## NAME OF IMPLICATION 2
+## Aesthetic Implications of Digital Technologies
 
 Replace this text with a clear explanation of what the implication means.
 
@@ -47,7 +47,7 @@ Replace this text with an explanation of what you will need to consider moving f
 
 
 
-## NAME OF IMPLICATION 3
+## Usability Implications of Digital Technologies
 
 Replace this text with a clear explanation of what the implication means.
 
@@ -61,7 +61,7 @@ Replace this text with an explanation of what you will need to consider moving f
 
 
 
-## NAME OF IMPLICATION 4
+## Functionality Implications of Digital Technologies
 
 Replace this text with a clear explanation of what the implication means.
 
@@ -75,7 +75,7 @@ Replace this text with an explanation of what you will need to consider moving f
 
 
 
-## NAME OF IMPLICATION 5
+## Accessibility Implications of Digital Technologies
 
 Replace this text with a clear explanation of what the implication means.
 
