@@ -7,13 +7,13 @@ by YOUR NAME HERE
 
 ## Project Description
 
-Replace this text with your project description and list the key features below( What your making and key feautures, Overall view on what its is supposed to do)
+My website is where people go on it to make a group where they then can track eachother gameplay or their quest so that they can plan a session to play.
 
-- Feature 1 here
-- Feature 2 here
-- Feature 3 here
-- Feature 4 here
-- Feature 5 here
+- Feature 1: One of my feature is that you wil be able to login 
+- Feature 2: The next feature is that you can create multiple groups and they can be for diffrent games.
+- Feature 3: You will be able to list task and put url's for snowrunner and only maprunner url will work
+- Feature 4: You will be able to join and leave a group at any given time 
+- Feature 5: You will need a code to join someone or their group.
 
 
 ---
@@ -57,12 +57,10 @@ The project demonstrates a number of **complex database techniques**:
 
 The project demonstrates a number of **complex digital media (web) techniques**:
 - Using non-core functionality
-- Using sophisticated digital effects
-- Applying industry standards or guidelines
 - Using responsive design for use on multiple devices
 - The integration of original media assets
 - Using dynamic data handling and interactivity
-- Automation through scripts
+
 
 ** EDIT THESE LISTS ABOVE TO MATCH YOUR PROJECT**
 
