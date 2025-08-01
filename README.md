@@ -1,6 +1,6 @@
-# PROJECT NAME HERE
+# Plan Runner
 
-by YOUR NAME HERE
+by Keegan Gous
 
 
 ---
@@ -9,10 +9,10 @@ by YOUR NAME HERE
 
 My website is where people go on it to make a group where they then can track eachother gameplay or their quest so that they can plan a session to play.
 
-- Feature 1: One of my feature is that you wil be able to login 
+- Feature 1: This website can i also be used on other multiplayers games to plan sessions.
 - Feature 2: The next feature is that you can create multiple groups and they can be for diffrent games.
 - Feature 3: You will be able to list task and put url's for snowrunner and only maprunner url will work
-- Feature 4: You will be able to join and leave a group at any given time 
+- Feature 4: You will be able to join and leave a group at any given time.(Will need a code to join) 
 - Feature 5: You will need a code to join someone or their group.
 
 
