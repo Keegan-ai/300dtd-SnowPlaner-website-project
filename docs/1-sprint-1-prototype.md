@@ -38,13 +38,20 @@ The first stage of prototyping was to explore how the UI might 'flow' between st
 
 This Figma demo shows the initial design for the UI 'flow':
 
-
-
-**FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT**
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=68-93&p=f&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=68%3A93&show-proto-sidebar=1&embed-host=share" allowfullscreen></iframe>
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+The way i tested this first ui prototype was making other experience it like how it would work. I am going to use their feedback to make improvements to my design. Ill put the notes here as evident on what my user had said:
+User Feedback:
+1. Change "logged in" to not be a button
+2. Add "Sign out/Log out" button 
+3. Add A register page where users can create an account before they log in ( via login page). This is better for managing
+multiple accounts one user may have
+4. Display Group join code at the top of the screen "Group Info" page.
+5. Add a filter to the URL box to nly allow maprunner URLs
+6. "Leave Group" Button should have a confirmation message that requires the group code to proceed( as safety measure )
+7. Change layout so that the important stuff stay fixed on the screen.
 
 ### Changes / Improvements
 
