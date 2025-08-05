@@ -42,7 +42,7 @@ This Figma demo shows the initial design for the UI 'flow':
 
 ### Testing
 
-The way i tested this first ui prototype was making other experience it like how it would work. I am going to use their feedback to make improvements to my design. Ill put the notes here as evident on what my user had said:
+The way i tested this first ui prototype was making other's experience it like how it would work. I am going to use their feedback to make improvements to my design. Ill put the notes here as evident on what my user had said:
 User Feedback:
 1. Change "logged in" to not be a button
 2. Add "Sign out/Log out" button 
@@ -57,7 +57,7 @@ multiple accounts one user may have
 
 Replace this text with notes any improvements you made as a result of the testing.
 
-*IMPROVED FIGMA FLOW - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=77-376&p=f&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=77%3A376&show-proto-sidebar=1&embed-host=share" allowfullscreen></iframe>
 
 
 ---
