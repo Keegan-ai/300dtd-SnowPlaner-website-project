@@ -56,8 +56,21 @@ multiple accounts one user may have
 ### Changes / Improvements
 
 Replace this text with notes any improvements you made as a result of the testing.
+I changed the design and how it would work. 
+Here are the changes made:
+1. I changed the logged in button to be a sign out/Log out button 
+2.  I added a sign in page and added a create a account page
+3. I added round buttons that would be stuck and not move from the screen to make it more accesible.
+4. I changed it so that you need to use the group code to leave the group and i added the group code to where you will see the hole group
+5. I changed the url to only accept maprunner urls.
+
+Here: is my updated prototype:
 
 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=104-135&p=f&scaling=min-zoom&content-scaling=fixed&page-id=104%3A24&starting-point-node-id=104%3A135&embed-host=share" allowfullscreen></iframe>
+
+### Further Testing
+
+i tested my website further with my end user 
 
 
 ---
