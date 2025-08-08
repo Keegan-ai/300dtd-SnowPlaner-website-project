@@ -52,6 +52,8 @@ multiple accounts one user may have
 5. Add a filter to the URL box to nly allow maprunner URLs
 6. "Leave Group" Button should have a confirmation message that requires the group code to proceed( as safety measure )
 7. Change layout so that the important stuff stay fixed on the screen.
+8. Change the create to sign up 
+9. Make it so that when you  log out it takes you to the welcome page and change the sign up button to go to sign in page 
 
 ### Changes / Improvements
 
@@ -63,6 +65,8 @@ Here are the changes made:
 3. I added round buttons that would be stuck and not move from the screen to make it more accesible.
 4. I changed it so that you need to use the group code to leave the group and i added the group code to where you will see the hole group
 5. I changed the url to only accept maprunner urls.
+6. Changed on how my flow actually goes like my sign up button now goes to the sign in page and the log out button goes to the welcome 
+7. Also changed some wording in the sign up page 
 
 Here: is my updated prototype:
 
@@ -70,9 +74,9 @@ Here: is my updated prototype:
 
 ### Further Testing
 
-i tested my website further with my end user 
+Sharing this again with my end-users. They seemed to like my flow because it was easy to navigate without problem.
 
-
+My end-users were satisfied so im confident that i can move on to the initial prototype
 ---
 
 ## Initial UI Prototype
@@ -81,7 +85,7 @@ The next stage of prototyping was to develop the layout for each screen of the U
 
 This Figma demo shows the initial layout design for the UI:
 
-*FIGMA PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=148-117&p=f&scaling=min-zoom&content-scaling=fixed&page-id=131%3A151&starting-point-node-id=148%3A117&embed-host=share" allowfullscreen></iframe>
 
 ### Testing
 
