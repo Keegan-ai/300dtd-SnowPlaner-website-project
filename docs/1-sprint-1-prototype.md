@@ -14,20 +14,35 @@ Develop a prototype that simulates the key functionality of the system, then tes
 
 Replace this text with notes regarding the DB design.
 
-![SCREENSHOT OF DB DESIGN](screenshots/example.png)
+![SCREENSHOT OF DB DESIGN](screenshots/finshed_db.png)
+
 
 
 ### Required Data Input
 
-Replace this text with a description of what data will be input, and where / how it will be obtained.
+1. Most data will come from a web app where users enter it manually.
+2. When signing up, users will give their name, username, and password, which will be saved in the users table with the password stored securely in a hashed form.
+3. Users can create groups by giving them a name and optionally adding members.
+4. When a user joins a group, their user_id will be linked to the group_id in the membership table.
+5. To add a task, users will enter the task name, date and time, and optional details like a maprunner_url and description, and mark if the task is complete.
+6. Each task will be linked to a specific group and/or user.
 
 ### Required Data Output
 
-Replace this text with a description of the outputs for the system - what types of data will be displayed?
+1. The system will show user profiles with their username, name, and groups they belong to.
+2. Each group will show its name, members, and linked tasks.
+3. Tasks will list the name, date and time, description, completion status, and a maprunner_url link if available.
+4. Reports will compare completed and pending tasks for each user or group.
+5. Users can filter tasks by completion status, group, or date range.
 
 ### Required Data Processing
 
-Replace this text with a description of how the data will be processed to achieve the desired output(s) - any processes / formulae?
+1. The system will join the users, membership, group, and tasks tables to combine related data.
+2. Tasks can be filtered and sorted by date, completion status, or group.
+3. User passwords will be hashed during registration for security.
+4. The system will check that data is in the right format, such as valid timestamps and URLs.
+5. Reports will total how many tasks are completed per group and how many are assigned to each user.
+6. Optional fields like maprunner_url and description will only be used if they are provided.
 
 
 ---
@@ -75,8 +90,7 @@ Here: is my updated prototype:
 ### Further Testing
 
 Sharing this again with my end-users. They seemed to like my flow because it was easy to navigate without problem.
-
-My end-users were satisfied so im confident that i can move on to the initial prototype
+Meaning my end-users were satisfied so im confident that i can move on to the initial prototype
 ---
 
 ## Initial UI Prototype
