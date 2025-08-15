@@ -35,6 +35,13 @@ init_datetime(app)  # Handle UTC dates in timestamps
 def index():
     return render_template("pages/home.jinja")
 
+#-----------------------------------------------------------
+# Welcome page route
+#-----------------------------------------------------------
+@app.get("/welcome")
+def welcome():
+    return render_template("pages/welcome.jinja")
+
 
 #-----------------------------------------------------------
 # About page route
@@ -159,17 +166,17 @@ def delete_a_thing(id):
 #-----------------------------------------------------------
 # User registration form route
 #-----------------------------------------------------------
-@app.get("/register")
+@app.get("/sign_up")
 def register_form():
-    return render_template("pages/register.jinja")
+    return render_template("pages/sign_up.jinja")
 
 
 #-----------------------------------------------------------
 # User login form route
 #-----------------------------------------------------------
-@app.get("/login")
+@app.get("/sign_in")
 def login_form():
-    return render_template("pages/login.jinja")
+    return render_template("pages/sign_in.jinja")
 
 
 #-----------------------------------------------------------
@@ -203,11 +210,11 @@ def add_user():
 
             # And let them know it was successful and they can login
             flash("Registration successful", "success")
-            return redirect("/login")
+            return redirect("/sign_in")
 
         # Found an existing record, so prompt to try again
         flash("Username already exists. Try again...", "error")
-        return redirect("/register")
+        return redirect("/sign_up")
 
 
 #-----------------------------------------------------------
@@ -234,7 +241,7 @@ def login_user():
             # Hash matches?
             if check_password_hash(hash, password):
                 # Yes, so save info in the session
-                session["user_id"]   = user["id"]
+                session["id"] = user["id"]
                 session["user_name"] = user["name"]
                 session["logged_in"] = True
 
@@ -244,7 +251,7 @@ def login_user():
 
         # Either username not found, or password was wrong
         flash("Invalid credentials", "error")
-        return redirect("/login")
+        return redirect("/sign_in")
 
 
 #-----------------------------------------------------------

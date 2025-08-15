@@ -1,6 +1,6 @@
 {#=====================================================
-  User Registration page
-  - Form for adding a new user
+  User Login page
+  - Form for logging in
 =====================================================#}
 
 {% extends 'pages/base.jinja' %}
@@ -8,7 +8,7 @@
 
 {% block title %}
 
-    Flask Demo - New User
+    Flask Demo - Login
 
 {% endblock %}
 
@@ -18,17 +18,11 @@
     <article>
 
         <header>
-            <h2>New User Registration</h2>
+            <h2>Login...</h2>
         </header>
 
-        <form action="/add-user" method="POST">
-
-            <input
-                type="text"
-                name="name"
-                placeholder="Your name"
-                required
-            >
+         
+        <form action="/login-user" method="POST">
 
             <input
                 type="text"
@@ -44,12 +38,14 @@
                 required
             >
 
-            <button>Register</button>
+            <a href="/welcome" role="button">Cancel</a>
+
+            <button>Login</button>
 
         </form>
 
         <footer>
-            Or, if you already have an account, <a href="/login">login</a>
+            Or, if you don't have an account, <a href="/sign_up">Sign Up</a>
         </footer>
 
     </article>

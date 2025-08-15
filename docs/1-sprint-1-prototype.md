@@ -14,7 +14,7 @@ Develop a prototype that simulates the key functionality of the system, then tes
 
 Replace this text with notes regarding the DB design.
 
-![SCREENSHOT OF DB DESIGN](screenshots/finshed_db.png)
+![SCREENSHOT OF DB DESIGN](screenshots/improved_DB.png)
 
 
 
@@ -102,16 +102,21 @@ This Figma demo shows the initial layout design for the UI:
 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=148-117&p=f&scaling=min-zoom&content-scaling=fixed&page-id=131%3A151&starting-point-node-id=148%3A117&embed-host=share" allowfullscreen></iframe>
 
 ### Testing
+I showed my roughed out design for my website to my end-users and i wanted them to give feedback on the usability of the system and also the system functionality
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+Here is there feedback:
+ 1. Change order of login pages
+ 2. "create group" button and "join group" button should scroll with the user 
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+1. I've switched around the sign up page to now go to the sign in page
+2. Both "create a group" and "join group" buttons now stay fixed to the home page
+3. Added the abilitie so that users can create their own passcode for their group
 
-*FIGMA IMPROVED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=197-208&p=f&scaling=min-zoom&content-scaling=fixed&page-id=197%3A3&starting-point-node-id=197%3A208&embed-host=share" allowfullscreen></iframe>
 
-
+After showing my end-users again. They seemed to like the functionality because it was easy to use and looks nice. So i can continue without worry.
 ---
 
 ## Refined UI Prototype

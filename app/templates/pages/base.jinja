@@ -34,7 +34,7 @@
     <header>
         <nav>
             <ul>
-                <li><strong><a href="/">Flask App Demo</a></strong></li>
+                <h3><li><strong>Snow Planner</strong></li></h3>
             </ul>
 
             <ul>
@@ -44,9 +44,7 @@
 
                 {% endif %}
 
-                <li><a href="/">Home</a></li>
-                <li><a href="/things">Things</a></li>
-                <li><a href="/about">About</a></li>
+                {# Can put stuff here #}
 
                 {% if session.user_id %}
 
@@ -54,8 +52,7 @@
 
                 {% else %}
 
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
+                    <li><a href="/sign_in">Register</a></li>
 
                 {% endif %}
 
