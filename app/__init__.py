@@ -38,9 +38,9 @@ def index():
 #-----------------------------------------------------------
 # Welcome page route
 #-----------------------------------------------------------
-@app.get("/welcome")
-def welcome():
-    return render_template("pages/welcome.jinja")
+@app.get("/main")
+def main():
+    return render_template("pages/main.jinja")
 
 
 #-----------------------------------------------------------
@@ -241,13 +241,16 @@ def login_user():
             # Hash matches?
             if check_password_hash(hash, password):
                 # Yes, so save info in the session
+
+                print(user["id"])
+
                 session["id"] = user["id"]
                 session["user_name"] = user["name"]
                 session["logged_in"] = True
 
                 # And head back to the home page
                 flash("Login successful", "success")
-                return redirect("/")
+                return redirect("/main")
 
         # Either username not found, or password was wrong
         flash("Invalid credentials", "error")
