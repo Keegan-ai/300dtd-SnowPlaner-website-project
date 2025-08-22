@@ -46,17 +46,18 @@
 
                 {# Can put stuff here #}
 
-                {% if session.user_id %}
+                {% if session.logged_in %}
 
-                    <li><a href="/logout">Logout</a></li>
+                  <li><a href="/logout">Logout</a></li> 
 
                 {% else %}
 
+                    <li><a href="/sign_up">Register</a></li> 
 
                 {% endif %}
 
             </ul>
-            <li><a href="/sign_in">Register</a></li>
+            
         </nav>
     </header>
 

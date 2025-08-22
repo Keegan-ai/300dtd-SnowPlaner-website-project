@@ -46,9 +46,62 @@ def main():
 #-----------------------------------------------------------
 # About page route
 #-----------------------------------------------------------
-@app.get("/about/")
-def about():
-    return render_template("pages/about.jinja")
+@app.get("/group")
+def group():
+    return render_template("pages/group.jinja")
+
+#-----------------------------------------------------------
+# About page route
+#-----------------------------------------------------------
+@app.get("/create_group/")
+def create_group():
+    return render_template("pages/create_group.jinja")
+
+
+#-----------------------------------------------------------
+# Join group page route
+#-----------------------------------------------------------
+@app.get("/join")
+def join_group():
+    return render_template("pages/join_group.jinja")
+
+
+
+#-----------------------------------------------------------
+# Create group page route
+#-----------------------------------------------------------
+@app.get("/create-group")
+@login_required
+def create_group(): 
+    
+# Get the data from the form
+    group_name = request.form.get("group_name")
+   
+
+    with connect_db() as client:
+        # Attempt to find an existing record for that user
+        print (group_name)
+        sql = "SELECT * FROM group WHERE group_name = ?"
+        params = [group_name]
+        result = client.execute(sql, params)
+
+        # No existing record found, so safe to add the user
+        if not result.rows:
+            # Sanitise the name
+            group_name = html.escape(group_name)
+
+            # Add the user to the users table
+            sql = "INSERT INTO group (group_name) VALUES (?)"
+            params = [group_name]
+            client.execute(sql, params)
+
+            # And let them know it was successful and they can login
+            flash("Group created", "success")
+            return redirect("/main")
+
+        # Found an existing record, so prompt to try again
+        flash("Group failed to create", "error")
+        return redirect("/create_group")
 
 
 #-----------------------------------------------------------
@@ -249,7 +302,7 @@ def login_user():
                 session["logged_in"] = True
 
                 # And head back to the home page
-                flash("Login successful", "success")
+                # flash("Login successful", "success")
                 return redirect("/main")
 
         # Either username not found, or password was wrong
