@@ -6,9 +6,12 @@
 #===========================================================
 
 
+from click import password_option
 from flask import Flask, render_template, request, flash, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import html
+import secrets
+import string
 
 from app.helpers.session import init_session
 from app.helpers.db      import connect_db
@@ -67,7 +70,11 @@ def group_creator():
     return render_template("pages/group_creator.jinja")
 
 
-#-----------------------------------------------------------
+# Function to generate a secure random password
+def generate_password(length=7):
+    alphabet = string.ascii_letters + string.digits + string.punctuation
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
+
 # Create group rout
 #-----------------------------------------------------------
 @app.post("/create-group")
@@ -75,8 +82,10 @@ def group_creator():
 def create_group(): 
     # Get the data from the form
     group_name = request.form.get("group_name")
+   
 
     with connect_db() as client:
+
         # Attempt to find an existing record for that user
         sql = "SELECT * FROM `group` WHERE group_name = ?"
         params = [group_name]
@@ -85,9 +94,12 @@ def create_group():
         # No existing record found, so safe to add the user
         if not result.rows:
 
+            # Generate a random password
+            pass_key = generate_password()
+
             # Add the user to the users table
-            sql = "INSERT INTO `group` (group_name) VALUES (?)"
-            params = [group_name]
+            sql = "INSERT INTO `group` (group_name,pass_key) VALUES (?, ?)"
+            params = [group_name,pass_key]
             client.execute(sql, params)
 
             # And let them know it was successful and they can login
@@ -319,4 +331,3 @@ def logout():
     # And head back to the home page
     flash("Logged out successfully", "success")
     return redirect("/")
-
