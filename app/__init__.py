@@ -111,6 +111,46 @@ def create_group():
         return redirect("/creator")
 
 
+#-----------------------------------------------------------
+# Join group page route
+#-----------------------------------------------------------
+@app.post("/join-group")
+@login_required
+def join():
+    # Get the login form data
+    pass_key = request.form.get("pass_key")
+
+    with connect_db() as client:
+        # Attempt to find a record for that user
+        sql = "SELECT * FROM users WHERE username = ?"
+        params = [pass_key]
+        result = client.execute(sql, params)
+
+        # Did we find a record?
+        if result.rows:
+            # Yes, so check password
+            user = result.rows[0]
+            hash = user["password_hash"]
+
+            # Hash matches?
+            if check_password_hash(hash, pass_key):
+                # Yes, so save info in the session
+
+                print(user["id"])
+
+                session["id"] = user["id"]
+                session["user_name"] = user["name"]
+                session["logged_in"] = True
+
+                # And head back to the home page
+                # flash("Login successful", "success")
+                return redirect("/main")
+
+        # Either username not found, or password was wrong
+        flash("Invalid credentials", "error")
+        return redirect("/sign_in")
+
+
 
 # #-----------------------------------------------------------
 # # Things page route - Show all the things, and new thing form
