@@ -43,7 +43,22 @@ def index():
 #-----------------------------------------------------------
 @app.get("/main")
 def main():
-    return render_template("pages/main.jinja")
+    with connect_db() as client:
+        user_id = session.get("id")
+
+        # Get all the things from the DB
+        sql = """
+            SELECT id, name, pass_key
+            FROM `group`
+            WHERE creator = ?
+            ORDER BY name ASC
+        """
+        params=[user_id]
+        result = client.execute(sql, params)
+        groups = result.rows
+
+        # And show them on the page
+        return render_template("pages/main.jinja", groups=groups)
 
 
 
@@ -60,8 +75,24 @@ def join_group():
 #-----------------------------------------------------------
 @app.get("/group")
 def group():
-    return render_template("pages/group.jinja")
+      with connect_db() as client:
+        user_id = session.get("id")
 
+        # Get all the things from the DB
+        sql = """
+            SELECT id, name, pass_key
+            FROM `group`
+            WHERE creator = ?
+            ORDER BY name ASC
+        """
+        params=[user_id]
+        result = client.execute(sql, params)
+        groups = result.rows
+
+        # And show them on the page
+        return render_template("pages//group/{{ group.id }}", groups=groups)
+
+ 
 #-----------------------------------------------------------
 # About page route
 #-----------------------------------------------------------
@@ -81,14 +112,14 @@ def generate_password(length=7):
 @login_required
 def create_group(): 
     # Get the data from the form
-    group_name = request.form.get("group_name")
+    name = request.form.get("group_name")
    
 
     with connect_db() as client:
 
         # Attempt to find an existing record for that user
-        sql = "SELECT * FROM `group` WHERE group_name = ?"
-        params = [group_name]
+        sql = "SELECT * FROM `group` WHERE name = ?"
+        params = [name]
         result = client.execute(sql, params)
 
         # No existing record found, so safe to add the user
@@ -98,8 +129,8 @@ def create_group():
             pass_key = generate_password()
 
             # Add the user to the users table
-            sql = "INSERT INTO `group` (group_name,pass_key) VALUES (?, ?)"
-            params = [group_name,pass_key]
+            sql = "INSERT INTO `group` (name,pass_key, creator) VALUES (?, ?, ?)"
+            params = [name,pass_key, session["id"]]
             client.execute(sql, params)
 
             # And let them know it was successful and they can login

@@ -7,14 +7,23 @@
 {% extends 'pages/base.jinja' %}
 
 
-{% block title %}
-
-    Flask Demo - Single Thing
-
-{% endblock %}
-
-
 {% block content %}
+
+   {% if groups %}
+        <ul>
+            {% for group in groups %}
+
+                  Name: {{ group.name }}
+                  Key: <code>{{ group.pass_key }}</code>
+
+                  <a href="/group/{{ group.id }}">Click here for more group info</a>
+                  
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not a member or owner of any groups yet.</p>
+    {% endif %}
+
 
 
 {% endblock %}

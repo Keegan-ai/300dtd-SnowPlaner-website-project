@@ -12,6 +12,22 @@
 
     <h1>My Groups:</h1>
 
+    {% if groups %}
+        <ul>
+            {% for group in groups %}
+
+                  Name: {{ group.name }}
+                  Key: <code>{{ group.pass_key }}</code>
+
+                  <a href="/group/{{ group.id }}">Click here for more group info</a>
+                  
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not a member or owner of any groups yet.</p>
+    {% endif %}
+
+
 
 
     <a href="/group " role="button">See Group Info</a>
