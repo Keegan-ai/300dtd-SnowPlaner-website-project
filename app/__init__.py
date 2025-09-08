@@ -6,7 +6,7 @@
 #===========================================================
 
 
-from click import password_option
+from click import Group, password_option
 from flask import Flask, render_template, request, flash, redirect, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import html
@@ -75,22 +75,7 @@ def join_group():
 #-----------------------------------------------------------
 @app.get("/group")
 def group():
-      with connect_db() as client:
-        user_id = session.get("id")
-
-        # Get all the things from the DB
-        sql = """
-            SELECT id, name, pass_key
-            FROM `group`
-            WHERE creator = ?
-            ORDER BY name ASC
-        """
-        params=[user_id]
-        result = client.execute(sql, params)
-        groups = result.rows
-
-        # And show them on the page
-        return render_template("pages//group/{{ group.id }}", groups=groups)
+    return render_template("pages/group")
 
  
 #-----------------------------------------------------------
@@ -148,38 +133,32 @@ def create_group():
 @app.post("/join-group")
 @login_required
 def join():
-    # Get the login form data
-    pass_key = request.form.get("pass_key")
+     # Get the login form data
+    submitted_pass_key = request.form.get("pass_key")
 
     with connect_db() as client:
-        # Attempt to find a record for that user
-        sql = "SELECT * FROM users WHERE username = ?"
-        params = [pass_key]
+        # Attempt to find a record for that group using the plaintext passkey
+        sql = "SELECT * FROM `group` WHERE pass_key = ?"
+        params = [submitted_pass_key]
         result = client.execute(sql, params)
 
         # Did we find a record?
         if result.rows:
-            # Yes, so check password
-            user = result.rows[0]
-            hash = user["password_hash"]
+            groups = result.rows[0]
+            
+            # Since the database has a plaintext passkey, no hashing check is needed.
+            # The database query already verified the passkey.
 
-            # Hash matches?
-            if check_password_hash(hash, pass_key):
-                # Yes, so save info in the session
+            # Save group info in the session
+            session["group_id"] = group["id"]
+            session["group_name"] = group["name"]
 
-                print(user["id"])
+            flash("Successfully joined the group!", "success")
+            return redirect("/main", groups=group)
 
-                session["id"] = user["id"]
-                session["user_name"] = user["name"]
-                session["logged_in"] = True
-
-                # And head back to the home page
-                # flash("Login successful", "success")
-                return redirect("/main")
-
-        # Either username not found, or password was wrong
-        flash("Invalid credentials", "error")
-        return redirect("/sign_in")
+        # No group found with that passkey
+        flash("Group does not exist or incorrect passkey", "error")
+        return redirect("/main")
 
 
 
@@ -208,37 +187,32 @@ def join():
 #         return render_template("pages/things.jinja", things=things)
 
 
-# #-----------------------------------------------------------
-# # Thing page route - Show details of a single thing
-# #-----------------------------------------------------------
-# @app.get("/thing/<int:id>")
-# def show_one_thing(id):
-#     with connect_db() as client:
-#         # Get the thing details from the DB, including the owner info
-#         sql = """
-#             SELECT things.id,
-#                    things.name,
-#                    things.price,
-#                    things.user_id,
-#                    users.name AS owner
+#-----------------------------------------------------------
+# Thing page route - Show details of a single thing
+#-----------------------------------------------------------
+@app.get("/group/<int:id>")
+def show_group_info(id):
+    with connect_db() as client:
+        # Get the thing details from the DB, including the owner info
+        sql = """
+            SELECT 
+                name,
+                pass_key 
+            FROM 'group'
+            WHERE  id = ?
+        """
+        params = [id]
+        result = client.execute(sql, params)
 
-#             FROM things
-#             JOIN users ON things.user_id = users.id
+        # Did we get a result?
+        if result.rows:
+            # yes, so show it on the page
+            group = result.rows[0]
+            return render_template("pages/main.jinja")
 
-#             WHERE things.id=?
-#         """
-#         params = [id]
-#         result = client.execute(sql, params)
-
-#         # Did we get a result?
-#         if result.rows:
-#             # yes, so show it on the page
-#             thing = result.rows[0]
-#             return render_template("pages/thing.jinja", thing=thing)
-
-#         else:
-#             # No, so show error
-#             return not_found_error()
+        else:
+            # No, so show error
+            return not_found_error()
 
 
 #-----------------------------------------------------------
