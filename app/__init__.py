@@ -36,6 +36,9 @@ init_datetime(app)  # Handle UTC dates in timestamps
 #-----------------------------------------------------------
 @app.get("/")
 def index():
+    if session.get("logged_in"):
+        return redirect("/main")
+
     return render_template("pages/home.jinja")
 
 #-----------------------------------------------------------
@@ -55,10 +58,23 @@ def main():
         """
         params=[user_id]
         result = client.execute(sql, params)
-        groups = result.rows
+        owned_groups = result.rows
+
+
+        # Get all the things from the DB
+        sql = """
+            SELECT id, name
+            FROM `group`
+            JOIN membership ON membership.group_id = `group`.id
+            WHERE membership.user_id = ?
+            ORDER BY name ASC
+        """
+        params=[user_id]
+        result = client.execute(sql, params)
+        member_groups = result.rows
 
         # And show them on the page
-        return render_template("pages/main.jinja", groups=groups)
+        return render_template("pages/main.jinja", owned_groups=owned_groups, member_groups=member_groups)
 
 
 
@@ -68,14 +84,6 @@ def main():
 @app.get("/join")
 def join_group():
     return render_template("pages/join_group.jinja")
-
-
-#-----------------------------------------------------------
-# About page route
-#-----------------------------------------------------------
-@app.get("/group")
-def group():
-    return render_template("pages/group")
 
  
 #-----------------------------------------------------------
@@ -144,17 +152,22 @@ def join():
 
         # Did we find a record?
         if result.rows:
-            groups = result.rows[0]
+            group = result.rows[0]
             
             # Since the database has a plaintext passkey, no hashing check is needed.
             # The database query already verified the passkey.
-
+           
             # Save group info in the session
-            session["group_id"] = group["id"]
-            session["group_name"] = group["name"]
+            group_id = group["id"]
+            user_id = session["id"]
+
+            # Add the user to the group
+            sql = "INSERT INTO `membership` (group_id, user_id) VALUES (?, ?)"
+            params = [group_id, user_id]
+            client.execute(sql, params)            
 
             flash("Successfully joined the group!", "success")
-            return redirect("/main", groups=group)
+            return redirect("/main")
 
         # No group found with that passkey
         flash("Group does not exist or incorrect passkey", "error")
@@ -208,7 +221,7 @@ def show_group_info(id):
         if result.rows:
             # yes, so show it on the page
             group = result.rows[0]
-            return render_template("pages/main.jinja")
+            return render_template("pages/group.jinja")
 
         else:
             # No, so show error
@@ -226,7 +239,7 @@ def show_group_info(id):
 #     name  = request.form.get("name")
 #     price = request.form.get("price")
 
-#     # Sanitise the text inputs
+#     # Sanitise the text inputst
 #     name = html.escape(name)
 
 #     # Get the user id from the session

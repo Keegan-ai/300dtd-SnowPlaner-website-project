@@ -10,27 +10,37 @@
 
 {% block content %}
 
-    <h1>My Groups:</h1>
+  <article>
+    <h1>Groups I CReated:</h1>
 
-    {% if groups %}
+    {% if owned_groups %}
         <ul>
-            {% for group in groups %}
-                <p>
-                  Name: {{ group.name }}
-                </p>
-                <p>
-                  Key: <code>{{ group.pass_key }}</code>
-                </p>
-                <p>
-                  <a href="/group/{{ group.id }}">Click here for more group info</a>
-                </p>
-
+            {% for group in owned_groups %}
+                <li>
+                  Name: <a href="/group/{{ group.id }}">{{ group.name }}</a>, Key: <code>{{ group.pass_key }}</code>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>You are not a member or owner of any groups yet.</p>
+        <p>You are not an owner of any groups yet.</p>
     {% endif %}
+</article>
 
+<article>
+    <h1>Groups I Have Joined:</h1>
+
+    {% if member_groups %}
+        <ul>
+            {% for group in member_groups %}
+                <li>
+                  Name: <a href="/group/{{ group.id }}">{{ group.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You are not a member any groups yet.</p>
+    {% endif %}
+</article>
 
 
 
