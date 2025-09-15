@@ -10,14 +10,15 @@
 {% block content %}
 
  <article>
-    <h1>Groups I CReated:</h1>
+    <h1>Group info:</h1>
 
-    {% if group in group.id %}
+    {% if my_group %}
         <ul>
-            {% for group in group.id %}
-                <li>
-                  Name: <a href="/group/{{ group.id }}">{{ group.name }}</a>
-                </li>
+            {% for group in my_group %}
+              <li>
+                Key: <code>{{ group.pass_key }}</code>
+                Name: {{ group.name }}
+              </li>  
             {% endfor %}
         </ul>
     {% endif %}

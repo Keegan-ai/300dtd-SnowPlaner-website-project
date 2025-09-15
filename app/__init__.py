@@ -12,7 +12,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import html
 import secrets
 import string
-
 from app.helpers.session import init_session
 from app.helpers.db      import connect_db
 from app.helpers.errors  import init_error, not_found_error
@@ -209,23 +208,24 @@ def show_group_info(id):
         # Get the thing details from the DB, including the owner info
         sql = """
             SELECT 
-                name,
-                pass_key 
-            FROM 'group'
-            WHERE  id = ?
+               name, 
+               pass_key
+            FROM `group`
+            WHERE id = ?
         """
-        params = [id]
+        params = [id,]
         result = client.execute(sql, params)
 
         # Did we get a result?
         if result.rows:
             # yes, so show it on the page
-            group = result.rows[0]
-            return render_template("pages/group.jinja")
+            my_group = result.rows[0]
+            return render_template("pages/group.jinja", my_group=my_group)
 
         else:
             # No, so show error
             return not_found_error()
+
 
 
 #-----------------------------------------------------------
