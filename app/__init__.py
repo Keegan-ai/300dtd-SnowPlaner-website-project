@@ -219,8 +219,8 @@ def show_group_info(id):
         # Did we get a result?
         if result.rows:
             # yes, so show it on the page
-            my_group = result.rows[0]
-            return render_template("pages/group.jinja", my_group=my_group)
+            my_groups = result.rows[0]
+            return render_template("pages/group.jinja", my_groups=my_groups)
 
         else:
             # No, so show error

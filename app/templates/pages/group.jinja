@@ -12,9 +12,9 @@
  <article>
     <h1>Group info:</h1>
 
-    {% if my_group %}
+    {% if my_groups %}
         <ul>
-            {% for group in my_group %}
+            {% for group in my_groups %}
               <li>
                 Key: <code>{{ group.pass_key }}</code>
                 Name: {{ group.name }}
