@@ -7,35 +7,48 @@
 
 {% extends 'pages/base.jinja' %}
 
-
-{% block title %}
-
-    Flask Demo
-
-{% endblock %}
-
-
 {% block content %}
 
-    <h1>Flask Demo App with Turso DB and User Accounts</h1>
+    <h2>Add Task </h2>
+    <p> Here is where you can add a task to the Group</p>
 
-    <p>This is a simple Flask app that connects to a Turso database to save and retrieve data, and also manage user accounts. This can be used as the basis of your web app.</p>
 
-    <p>It includes...</p>
+  <form action="/group/{{ group_id }}/add-task" method="POST">
 
-    <ul>
-        <li>Example routes</li>
-        <li>Example static pages</li>
-        <li>Missing page and server error pages</li>
-        <li>DB connection and error handling</li>
-        <li>Example CRUD actions: Create and Delete</li>
-        <li>User account creation</li>
-        <li>User login / logout</li>
-        <li>Adaption of menus / routes / content based on login status</li>
-        <li>Flash messages for information</li>
-    </ul>
+            <input
+                type="text"
+                name="task_name"
+                placeholder="Put task name here"
+                required
+            >
 
-    <a href="/things" role="button">Go to the Things...</a>
+            
+            <textarea
+                name="description"
+                placeholder="Put description on what the task is"
+                required
+            ></textarea>
+
+            <input
+                type="date"
+                name="time_stamp"
+                placeholder="Time"
+                required
+            >
+
+            <input
+                type="url"
+                name="maprunner_url"
+                placeholder="Only maprunner urls here"
+                required
+            >
+
+
+            <a href="/group/{{ group_id }}" role="button">Cancel</a>
+
+            <button>Confirm</button>
+
+        </form>
 
 {% endblock %}
 

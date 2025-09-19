@@ -12,18 +12,18 @@
  <article>
     <h1>Group info:</h1>
 
-    {% if my_groups %}
-        <ul>
-            {% for group in my_groups %}
-              <li>
-                Key: <code>{{ group.pass_key }}</code>
-                Name: {{ group.name }}
-              </li>  
-            {% endfor %}
-        </ul>
+    {% if my_group %}
+
+        Name: {{ my_group.name }}
+        Key: <code>{{ my_group.pass_key }}</code>
+ 
     {% endif %}
 </article>
 
+
+
+  <a href="/group/{{ my_group.id }}/add-task " role="button">Add Task</a>
+  <a href="/main " role="button">Back</a>
 
 {% endblock %}
 

@@ -84,7 +84,7 @@ def main():
 def join_group():
     return render_template("pages/join_group.jinja")
 
- 
+
 #-----------------------------------------------------------
 # About page route
 #-----------------------------------------------------------
@@ -174,6 +174,50 @@ def join():
 
 
 
+
+#-----------------------------------------------------------
+# Join group page route
+#-----------------------------------------------------------
+@app.get("/group/<int:id>/add-task")
+def add_task(id):
+    return render_template("pages/add_task.jinja", group_id=id)
+
+
+ 
+#-----------------------------------------------------------
+# Route for adding a thing, using data posted from a form
+# - Restricted to logged in users
+# #-----------------------------------------------------------
+@app.post("/group/<int:id>/add-task")
+@login_required
+def add_a_task(id):
+
+    # Get the data from the form
+    task_name = request.form.get("task_name")
+    descriptiom = request.form.get("description")
+    time_stamp = request.form.get("time_stamp")
+    maprunner_url = request.form.get("maprunner_url")
+
+    # Sanitise the text inputst
+    name = html.escape(task_name)
+    name = html.escape(descriptiom)
+    name = html.escape(time_stamp)
+    name = html.escape(maprunner_url)
+
+    # Get the user id from the session
+    user_id = session["id"]
+    group_id = id
+
+    with connect_db() as client:
+        # Add the thing to the DB
+        sql = "INSERT INTO tasks (task_name, description, time_stamp, maprunner_url, group_id ,user_id) VALUES (?, ?, ?, ?, ?, ?)"
+        params = [task_name, descriptiom, time_stamp, maprunner_url, group_id, user_id]
+        client.execute(sql, params)
+
+        # Go back to the home page
+        return redirect("/main")
+
+
 # #-----------------------------------------------------------
 # # Things page route - Show all the things, and new thing form
 # #-----------------------------------------------------------
@@ -208,23 +252,21 @@ def show_group_info(id):
         # Get the thing details from the DB, including the owner info
         sql = """
             SELECT 
+               id, 
                name, 
                pass_key
+
             FROM `group`
             WHERE id = ?
         """
         params = [id,]
         result = client.execute(sql, params)
-
+        my_group = result.rows[0]
+    
         # Did we get a result?
-        if result.rows:
-            # yes, so show it on the page
-            my_groups = result.rows[0]
-            return render_template("pages/group.jinja", my_groups=my_groups)
-
-        else:
-            # No, so show error
-            return not_found_error()
+        # yes, so show it on the page
+            
+        return render_template("pages/group.jinja", my_group=my_group)
 
 
 

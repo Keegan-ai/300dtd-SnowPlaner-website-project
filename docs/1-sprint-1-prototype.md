@@ -125,15 +125,16 @@ Having established the layout of the UI screens, the prototype was refined visua
 
 This Figma demo shows the UI with refinements applied:
 
-*FIGMA REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1440" height="1024" src="https://embed.figma.com/proto/nHkOgxPdsQ0wW41REtSelK/Web-Design?node-id=197-208&p=f&scaling=min-zoom&content-scaling=fixed&page-id=197%3A3&starting-point-node-id=197%3A208&embed-host=share" allowfullscreen></iframe>
 
 ### Testing
 
-Replace this text with notes about what you did to test the UI flow and the outcome of the testing.
+After doing some testing i found out that my users loved the Initial Prototype and told me that it works well and looks visually good and none of them had a something in mind that 
+i had to change.
 
 ### Changes / Improvements
 
-Replace this text with notes any improvements you made as a result of the testing.
+No Changes were made 
 
 *FIGMA IMPROVED REFINED PROTOTYPE - PLACE THE FIGMA EMBED CODE HERE - MAKE SURE IT IS SET SO THAT EVERYONE CAN ACCESS IT*
 
@@ -142,5 +143,6 @@ Replace this text with notes any improvements you made as a result of the testin
 
 ## Sprint Review
 
+This has taught me alot about how websites should be and its moved this project forward by making me fix mistakes that other people notice which went well. The only thing that didnt go well was the time i spent on this sprint which reduced my time on begining with writing my code. The key succes point was my users pointing out mistakes i made
 Replace this text with a statement about how the sprint has moved the project forward - key success point, any things that didn't go so well, etc.
 
