@@ -98,7 +98,8 @@ def generate_password(length=7):
     alphabet = string.ascii_letters + string.digits + string.punctuation
     return ''.join(secrets.choice(alphabet) for _ in range(length))
 
-# Create group rout
+#-----------------------------------------------------------
+# Create group route
 #-----------------------------------------------------------
 @app.post("/create-group")
 @login_required
@@ -171,6 +172,9 @@ def join():
         # No group found with that passkey
         flash("Group does not exist or incorrect passkey", "error")
         return redirect("/main")
+    
+
+
 
 
 
@@ -209,12 +213,60 @@ def add_a_task(id):
     group_id = id
 
     with connect_db() as client:
-        # Add the thing to the DB
+
         sql = "INSERT INTO tasks (task_name, description, time_stamp, maprunner_url, group_id ,user_id) VALUES (?, ?, ?, ?, ?, ?)"
         params = [task_name, descriptiom, time_stamp, maprunner_url, group_id, user_id]
         client.execute(sql, params)
 
         # Go back to the home page
+        return redirect("/main")
+    
+
+    #-----------------------------------------------------------
+# Thing page route - Show details of a single thing
+#-----------------------------------------------------------
+@app.get("/group/<int:id>")
+def show_group_info(id):
+    with connect_db() as client:
+        # Get the thing details from the DB, including the owner info
+        sql = """
+            SELECT 
+               id, 
+               name, 
+               pass_key
+
+            FROM `group`
+            WHERE id = ?
+        """
+        params = [id,]
+        result = client.execute(sql, params)
+        my_group = result.rows[0]
+    
+        # Did we get a result?
+        # yes, so show it on the page
+            
+        return render_template("pages/group.jinja", my_group=my_group)
+    
+
+#-----------------------------------------------------------
+# Route for deleting a thing, Id given in the route
+# - Restricted to logged in users
+#-----------------------------------------------------------
+@app.get("/leave-group")
+@login_required
+def leave_a_group(id):
+    # Get the user id from the session
+    user_id = session["user_id"]
+    group_id = session["group_id"]
+
+    with connect_db() as client:
+        # Delete the thing from the DB only if we own it
+        sql = "DELETE FROM `group` WHERE user_id=?"
+        params = [group_id, user_id]
+        client.execute(sql, params)
+
+        # Go back to the home page
+        flash("Thing deleted", "success")
         return redirect("/main")
 
 
@@ -243,30 +295,7 @@ def add_a_task(id):
 #         return render_template("pages/things.jinja", things=things)
 
 
-#-----------------------------------------------------------
-# Thing page route - Show details of a single thing
-#-----------------------------------------------------------
-@app.get("/group/<int:id>")
-def show_group_info(id):
-    with connect_db() as client:
-        # Get the thing details from the DB, including the owner info
-        sql = """
-            SELECT 
-               id, 
-               name, 
-               pass_key
 
-            FROM `group`
-            WHERE id = ?
-        """
-        params = [id,]
-        result = client.execute(sql, params)
-        my_group = result.rows[0]
-    
-        # Did we get a result?
-        # yes, so show it on the page
-            
-        return render_template("pages/group.jinja", my_group=my_group)
 
 
 
