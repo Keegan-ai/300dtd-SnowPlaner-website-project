@@ -243,30 +243,32 @@ def show_group_info(id):
         my_group = result.rows[0]
     
         # Did we get a result?
+
         # yes, so show it on the page
-            
         return render_template("pages/group.jinja", my_group=my_group)
     
 
 #-----------------------------------------------------------
 # Route for deleting a thing, Id given in the route
-# - Restricted to logged in users
+
 #-----------------------------------------------------------
-@app.get("/leave-group")
+@app.post("/leave-group")
 @login_required
 def leave_a_group(id):
     # Get the user id from the session
     user_id = session["user_id"]
     group_id = session["group_id"]
 
+
+    
     with connect_db() as client:
         # Delete the thing from the DB only if we own it
         sql = "DELETE FROM `group` WHERE user_id=?"
-        params = [group_id, user_id]
+        params = [id, group_id, user_id]
         client.execute(sql, params)
 
         # Go back to the home page
-        flash("Thing deleted", "success")
+        flash("Left Group", "succesfully")
         return redirect("/main")
 
 

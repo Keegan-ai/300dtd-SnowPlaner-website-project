@@ -23,7 +23,6 @@ The key functionality of the web app was implemented:
 
 **PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE SYSTEM HERE**
 
-
 ---
 
 ## Testing FEATURE NAME HERE
