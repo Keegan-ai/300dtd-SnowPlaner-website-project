@@ -219,7 +219,7 @@ def add_a_task(id):
         client.execute(sql, params)
 
         # Go back to the home page
-        return redirect("/main")
+        return redirect(f"/group/{id}")
     
 
     #-----------------------------------------------------------
@@ -249,27 +249,43 @@ def show_group_info(id):
     
 
 #-----------------------------------------------------------
-# Route for deleting a thing, Id given in the route
-
+# Leave group route
 #-----------------------------------------------------------
-@app.post("/leave-group")
+@app.post("/group/<int:group_id>/leave")
 @login_required
-def leave_a_group(id):
-    # Get the user id from the session
-    user_id = session["user_id"]
-    group_id = session["group_id"]
+def leave_group(group_id):
+    user_id = session["id"]
 
-
-    
     with connect_db() as client:
-        # Delete the thing from the DB only if we own it
-        sql = "DELETE FROM `group` WHERE user_id=?"
-        params = [id, group_id, user_id]
-        client.execute(sql, params)
+        # Check if the group exists
+        sql = "SELECT creator FROM `group` WHERE id = ?"
+        params = [group_id]
+        result = client.execute(sql, params)
 
-        # Go back to the home page
-        flash("Left Group", "succesfully")
-        return redirect("/main")
+        if not result.rows:
+            flash("Group not found.", "error")
+            return redirect("/main")
+
+        group = result.rows[0]
+        creator_id = group["creator"]
+
+        if creator_id == user_id:
+            # Owner: delete members + group
+            sql = "DELETE FROM membership WHERE group_id = ?"
+            client.execute(sql, [group_id])
+
+            sql = "DELETE FROM `group` WHERE id = ?"
+            client.execute(sql, [group_id])
+
+            flash("Group deleted and members removed.", "success")
+        else:
+            # Member: just leave
+            sql = "DELETE FROM membership WHERE group_id = ? AND user_id = ?"
+            client.execute(sql, [group_id, user_id])
+
+            flash("You left the group.", "success")
+
+    return redirect("/main")
 
 
 # #-----------------------------------------------------------

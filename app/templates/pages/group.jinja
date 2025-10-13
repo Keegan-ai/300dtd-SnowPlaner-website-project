@@ -24,7 +24,10 @@
 
   <a href="/group/{{ my_group.id }}/add-task " role="button">Add Task</a>
   <a href="/main " role="button">Back</a>
-  <A HREF="/leave-group" role="button">Leave Group</A>
+
+  <form action="/group/{{ my_group.id }}/leave" method="post">
+    <button type="submit" class="btn btn-danger">Leave Group</button>
+</form>
 
 {% endblock %}
 
