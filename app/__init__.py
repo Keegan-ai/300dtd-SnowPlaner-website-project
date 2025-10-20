@@ -198,54 +198,70 @@ def add_a_task(id):
 
     # Get the data from the form
     task_name = request.form.get("task_name")
-    descriptiom = request.form.get("description")
+    description = request.form.get("description")
     time_stamp = request.form.get("time_stamp")
     maprunner_url = request.form.get("maprunner_url")
 
-    # Sanitise the text inputst
-    name = html.escape(task_name)
-    name = html.escape(descriptiom)
-    name = html.escape(time_stamp)
-    name = html.escape(maprunner_url)
+    # Sanitise the text inputs
+    task_name = html.escape(task_name or "")
+    description = html.escape(description or "")
+    time_stamp = html.escape(time_stamp or "")
+    maprunner_url = html.escape(maprunner_url or "")
 
     # Get the user id from the session
     user_id = session["id"]
     group_id = id
 
     with connect_db() as client:
-
-        sql = "INSERT INTO tasks (task_name, description, time_stamp, maprunner_url, group_id ,user_id) VALUES (?, ?, ?, ?, ?, ?)"
-        params = [task_name, descriptiom, time_stamp, maprunner_url, group_id, user_id]
+        sql = """
+            INSERT INTO tasks (task_name, description, time_stamp, maprunner_url, group_id, user_id)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """
+        params = [task_name, description, time_stamp, maprunner_url, group_id, user_id]
         client.execute(sql, params)
 
-        # Go back to the home page
-        return redirect(f"/group/{id}")
+    # Go back to the group page
+    return redirect(f"/group/{id}")
     
 
-    #-----------------------------------------------------------
-# Thing page route - Show details of a single thing
+#-----------------------------------------------------------
+# Group page route - Show group info and its tasks
 #-----------------------------------------------------------
 @app.get("/group/<int:id>")
 def show_group_info(id):
     with connect_db() as client:
-        # Get the thing details from the DB, including the owner info
+        # Get the group details
         sql = """
             SELECT 
                id, 
                name, 
                pass_key
-
             FROM `group`
             WHERE id = ?
         """
-        params = [id,]
+        params = [id]
         result = client.execute(sql, params)
         my_group = result.rows[0]
-    
-        # Did we get a result?
 
-        # yes, so show it on the page
-        return render_template("pages/group.jinja", my_group=my_group)
+        # Get all tasks for this group and the name of the user who created each task
+        sql = """
+            SELECT
+                tasks.id,
+                tasks.task_name,
+                tasks.description,
+                tasks.time_stamp,
+                tasks.maprunner_url,
+                tasks.user_id,
+                users.name AS creator_name
+            FROM tasks
+            JOIN users ON tasks.user_id = users.id
+            WHERE tasks.group_id = ?
+            ORDER BY tasks.time_stamp ASC
+        """
+        result = client.execute(sql, [id])
+        tasks = result.rows
+
+        return render_template("pages/group.jinja", my_group=my_group, tasks=tasks)
     
 
 #-----------------------------------------------------------

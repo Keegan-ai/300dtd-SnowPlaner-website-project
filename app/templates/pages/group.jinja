@@ -6,27 +6,50 @@
 
 {% extends 'pages/base.jinja' %}
 
-
 {% block content %}
 
- <article>
-    <h1>Group info:</h1>
+<article>
+  <h1>Group info:</h1>
 
-    {% if my_group %}
-
-        Name: {{ my_group.name }}
-        Key: <code>{{ my_group.pass_key }}</code>
- 
-    {% endif %}
+  {% if my_group %}
+    <p><strong>Name:</strong> {{ my_group.name }}</p>
+    <p><strong>Key:</strong> <code>{{ my_group.pass_key }}</code></p>
+  {% endif %}
 </article>
 
+<hr>
 
+<h2>Tasks</h2>
 
-  <a href="/group/{{ my_group.id }}/add-task " role="button">Add Task</a>
-  <a href="/main " role="button">Back</a>
+{% if tasks %}
+  <ul>
+    {% for task in tasks %}
+      <li class="task">
+        <div class="task-header" onclick="this.nextElementSibling.classList.toggle('open')">
+          <strong>{{ task.task_name }}</strong>
+          <small>({{ task.time_stamp }})</small>
+          <small style="margin-left:8px">by {{ task.creator_name }}</small>
+        </div>
+        <div class="task-details">
+          <p>{{ task.description }}</p>
+          {% if task.maprunner_url %}
+            <a href="{{ task.maprunner_url }}" target="_blank">View Map</a>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No tasks yet.</p>
+{% endif %}
 
-  <form action="/group/{{ my_group.id }}/leave" method="post">
-    <button type="submit" class="btn btn-danger">Leave Group</button>
+<hr>
+
+<a href="/group/{{ my_group.id }}/add-task" role="button">Add Task</a>
+<a href="/main" role="button">Back</a>
+
+<form action="/group/{{ my_group.id }}/leave" method="post" style="margin-top:10px;">
+  <button type="submit" class="btn btn-danger">Leave Group</button>
 </form>
 
 {% endblock %}
