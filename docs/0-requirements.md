@@ -34,22 +34,21 @@ This implication is very revelant to my system because it will allow me to think
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this implication.
 The consideration that i will have to take is what to make for the end user and what my end user wants. It will impact the concepts of my website because it will limit me on what the website would look like.
 
 
 
 ## Aesthetic Implications of Digital Technologies
 
-Replace this text with a clear explanation of what the implication means.
+The aesthetic implications of digital technologies refer to how the visual appearance and overall design of a system affect the user’s experience. This includes elements such as layout, color scheme, typography, images, and how information is presented on screen.
 
 ### Relevance to the System
 
-Replace this text with an explanation of why the implication is relevant to this particular project.
+This implication is relevant to my project because the look and feel of the system directly affect how users perceive and engage with it. A clear and attractive design helps users navigate the website easily and encourages them to return.
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this implication.
+Moving forward, I will need to carefully consider the visual design choices I make to ensure they support usability and accessibility. This includes selecting colors that provide good contrast, choosing simple and clean layouts, and making sure the interface looks good.
 
 
 
@@ -59,12 +58,11 @@ The meaning of this implication is that does my design appeal to end users, does
 
 ### Relevance to the System
 
-The relevance that this implcation gives is that my website should be colourfull of atleast pleasing to the end user.
+TThis implication is relevant to my project because the website needs to be designed in a way that users can understand and operate without confusion. A user-friendly layout with clear labels and simple navigation makes it easier for users to complete their tasks.
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this implication.
-This implacation will let me consider on what colour to show to my end user and how it will look like fo example the fonts and positioning of the words.
+When developing the project, I will need to consider how users interact with each part of the website. This includes choosing appropriate colors, fonts, and positioning of words to make the interface clear and visually balanced.
 
 
 
@@ -79,8 +77,7 @@ The functionality implication is relevant to my system because it ensures that m
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this implication.
-The considerations i will take are very beig because it will let me think on how it will work, Does it work, and will it even work. The impact it will have on website would be massive because it will change how my website would function.
+The considerations i will take are very big because it will let me think on how it will work, Does it work, and will it even work. The impact it will have on website would be massive because it will change how my website would function.
 
 
 
@@ -95,7 +92,6 @@ This is relevant to my project because i can make my website accesible to everyo
 
 ### Impact / Considerations
 
-Replace this text with an explanation of what you will need to consider moving forward and how the project will be impacted by this implication.
 The considerations i will take are how it will look and feel on a phone and laptop. I can make prototypes on how it will look on phones using figma and the same goes for laptops. This will greatly impact my website because it allows me to plan my website layout.
 
 

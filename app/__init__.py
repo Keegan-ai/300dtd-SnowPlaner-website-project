@@ -1,8 +1,9 @@
 #===========================================================
-# YOUR PROJECT TITLE HERE
-# YOUR NAME HERE
+# SnowPlaner
+# Keegan Gous
 #-----------------------------------------------------------
-# BRIEF DESCRIPTION OF YOUR PROJECT HERE
+# My project will be able to help people play snowrunner by making it so that they are able to create groups. Within these groups they will be able to plan and add task on what they want
+#to do like saying the task name and description of it. When your done it then pops up on the group info where everyone can see ensuring everybody that you want to do this quest.
 #===========================================================
 
 
