@@ -10,9 +10,9 @@ Develop a bare-bones, working web application that provides the key functionalit
 
 ## Implemented Database Schema
 
-Replace this text with notes regarding the DB schema.
+I have Updated my Db and made it so there would be no completed colum at task since we wont have enough time to make a checklist for it. This was the only improvement that was done and no further modifications have been done.
 
-![SCREENSHOT OF DB SCHEMA](screenshots/example.png)
+![SCREENSHOT OF DB SCHEMA](screenshots/updated_sql.png)
 
 
 ---
@@ -21,7 +21,25 @@ Replace this text with notes regarding the DB schema.
 
 The key functionality of the web app was implemented:
 
-**PLACE SCREENSHOTS AND/OR ANIMATED GIFS OF THE SYSTEM HERE**
+### Home Page
+Before logging in
+![Home Page](screenshots/home.png)
+
+After logging in.
+![2nd_Home Page](screenshots/2nd_home.png)
+
+### Group View
+Before clicking on the name
+![Group View](screenshots/Group.png)
+After clicking on the name
+![Group View](screenshots/Group_2.png)
+
+### Add Task Form
+![Add Task Form](screenshots/Add_task.png)
+![Add Task Form](screenshots/Add_task2.png)
+
+### Delete Task Feature
+![Delete Task](screenshots/delete_task.png)
 
 ---
 

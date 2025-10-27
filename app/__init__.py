@@ -226,6 +226,37 @@ def add_a_task(id):
     
 
 #-----------------------------------------------------------
+# Route to delete a task (only if you created it)
+#-----------------------------------------------------------
+@app.post("/task/<int:task_id>/delete")
+@login_required
+def delete_task(task_id):
+    user_id = session["id"]
+
+    with connect_db() as client:
+        # Check if the task belongs to the logged-in user
+        sql = "SELECT group_id, user_id FROM tasks WHERE id = ?"
+        result = client.execute(sql, [task_id])
+
+        if not result.rows:
+            flash("Task not found.", "error")
+            return redirect("/main")
+
+        task = result.rows[0]
+        group_id = task["group_id"]
+
+        if task["user_id"] != user_id:
+            flash("You can only delete your own tasks.", "error")
+            return redirect(f"/group/{group_id}")
+
+        # Delete the task
+        sql = "DELETE FROM tasks WHERE id = ? AND user_id = ?"
+        client.execute(sql, [task_id, user_id])
+
+        flash("Task deleted successfully!", "success")
+        return redirect(f"/group/{group_id}")
+
+#-----------------------------------------------------------
 # Group page route - Show group info and its tasks
 #-----------------------------------------------------------
 @app.get("/group/<int:id>")

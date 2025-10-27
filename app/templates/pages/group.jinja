@@ -1,7 +1,7 @@
 {#=====================================================
-  Thing page
-  - Shows details of a single thing
-  - Has a delete link to remove it
+  Group page
+  - Shows group details
+  - Lists tasks (with delete option for creator)
 =====================================================#}
 
 {% extends 'pages/base.jinja' %}
@@ -9,7 +9,7 @@
 {% block content %}
 
 <article>
-  <h1>Group info:</h1>
+  <h1>Group Info</h1>
 
   {% if my_group %}
     <p><strong>Name:</strong> {{ my_group.name }}</p>
@@ -30,10 +30,18 @@
           <small>({{ task.time_stamp }})</small>
           <small style="margin-left:8px">by {{ task.creator_name }}</small>
         </div>
+
         <div class="task-details">
           <p>{{ task.description }}</p>
+
           {% if task.maprunner_url %}
             <a href="{{ task.maprunner_url }}" target="_blank">View Map</a>
+          {% endif %}
+
+          {% if session.id == task.user_id %}
+            <form action="/task/{{ task.id }}/delete" method="post" style="margin-top:10px;">
+              <button type="submit" class="btn btn-danger btn-sm">Delete Task</button>
+            </form>
           {% endif %}
         </div>
       </li>
@@ -53,4 +61,3 @@
 </form>
 
 {% endblock %}
-
